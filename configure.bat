@@ -1,4 +1,6 @@
 @ECHO off
+rem See string #278 for explanation
+setlocal enabledelayedexpansion
 
 @rem -- defaults
 set QMAKE_BIN=qmake
@@ -273,7 +275,9 @@ if not "%QXT_INSTALL_BINS%" == "" goto skipdefaultbins
 if not "%QXT_INSTALL_FEATURES%" == "" goto skipdefaultfeatures
     %QMAKE_BIN% -query QMAKE_MKSPECS > %QXT_BUILD_TREE%\mkspecs.tmp
     set /p QXT_INSTALL_FEATURES=<%QXT_BUILD_TREE%\mkspecs.tmp
-    if "%QXT_INSTALL_FEATURES%" == "**Unknown**" %QMAKE_BIN% -query QT_HOST_DATA > %QXT_BUILD_TREE%\mkspecs.tmp & set /p QXT_INSTALL_FEATURES=<%QXT_BUILD_TREE%\mkspecs.tmp & set QXT_INSTALL_FEATURES=<%QXT_INSTALL_FEATURES%\mkspecs\
+    rem The following string requires delayed expansion of variables to be enabled (setlocal enabledelayedexpansion), otherwise it leads to incorrect handling of last statement in string
+    rem (QXT_INSTALL_FEATURES would be **Unknown**\mkspecs - it seems that Windows command processor substitutes variable values before executing the string as a whole)
+    if "%QXT_INSTALL_FEATURES%" == "**Unknown**" %QMAKE_BIN% -query QT_HOST_DATA > %QXT_BUILD_TREE%\mkspecs.tmp & set /p QXT_INSTALL_FEATURES=<%QXT_BUILD_TREE%\mkspecs.tmp & set QXT_INSTALL_FEATURES=!QXT_INSTALL_FEATURES!\mkspecs
     if "%QXT_INSTALL_FEATURES%" == "**Unknown**" echo "Cannot find mkspecs directory. Cannot proceed." & goto end
     set QXT_INSTALL_FEATURES=%QXT_INSTALL_FEATURES%\features
     del %QXT_BUILD_TREE%\mkspecs.tmp
