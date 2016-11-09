@@ -36,6 +36,7 @@ depends.pri*
 lib/
 tools/3rdparty/qdoc3/qdoc3
 .qmake.cache
+.qmake.stash
 qxtvars.prf
 *.vcproj
 *.exe
