@@ -45,6 +45,7 @@
 #include <QPointer>
 #include <QFile>
 #include <QtDebug>
+#include <QIODevice>
 
 class QxtMailAttachmentPrivate : public QSharedData
 {
