@@ -1,3 +1,16 @@
+LibQxt
+======
+
+This repository is forked from https://bitbucket.org/libqxt/libqxt with some fixes, which is able to compile with Qt 5.7 under Windows.
+
+Fixed:
+
+* https://bitbucket.org/libqxt/libqxt/pull-requests/37/fixed-incorrect-qxt_install_features/diff
+* https://bitbucket.org/libqxt/libqxt/issues/95/qt5-linux-latest-git
+
+Original Readme
+---------------
+```
 1) configure
 
 	make sure qmake is in your PATH and run ./configure  or configure.bat on windows.
@@ -50,3 +63,4 @@ to avoid copying files which will be rebuilt anyway.
 For RPM packages, you will need a standard .rpmmacros file in your home
 directory. A sample file, "rpmmacros-sample", is contained in the packages
 directory and must be edited for your environment before use.
+```
